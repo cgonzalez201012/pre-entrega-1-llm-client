@@ -58,6 +58,30 @@ python main.py --provider anthropic
 python main.py --provider gemini
 python main.py --resiliencia        # además prueba una API key inválida a propósito
 ```
+## Ejemplo de salida real
+
+Corrida real con Anthropic (`claude-haiku-4-5`) usando `python main.py --resiliencia`. El texto de las respuestas está abreviado con `[...]`.
+
+```text
+Proveedor: anthropic | modelo: claude-haiku-4-5
+
+=== Modo normal ===
+# Entropía
+La **entropía** es una medida del **desorden o la cantidad de energía no disponible** en un sistema.
+[...]
+[anthropic | claude-haiku-4-5-20251001 | 36 in / 363 out | 4.74s | fin: end_turn]
+
+=== Modo streaming ===
+# Entropía
+La **entropía** es una medida del **desorden o la aleatoriedad** en un sistema. [...]
+[TTFT: 0.55s | total: 4.10s]
+
+=== Prueba de resiliencia (API key invalida) ===
+¿El programa siguió vivo? Sí
+Error capturado (sin crash): auth -> API key invalida o sin permisos
+```
+
+El TTFT (0,55 s) frente al total (4,10 s) muestra el beneficio del streaming. En la prueba de resiliencia, una clave inválida produce un error controlado (`auth`) sin romper el programa.
 
 ## Uso desde código
 
